@@ -1,8 +1,8 @@
- #!/usr/bin/env
+#!/usr/bin/env python
 
 import datetime
 import sys
-from ..interfaces.ssh import ssh
+from ..interfaces import ssh
 
 
 def Bruteforcer( ):
