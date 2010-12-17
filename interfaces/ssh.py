@@ -5,6 +5,7 @@ Code to test SSH connections.
 
 import datetime
 import paramiko
+import pdb
 import sys
 from socket import error
 
@@ -40,25 +41,25 @@ class ssh( ):
                          timeout = 1)
         except paramiko.AuthenticationException:
             self.err(str(datetime.datetime.now()))
-            self.err(' - %s@%s using %s: ' % (self.host, self.user, passwd))
+            self.err(' - %s@%s using %s: ' % (self.user, self.host, passwd))
             self.err('bad password!\n')
             self.exception_type = paramiko.AuthenticationException
             ret_val = False
         except paramiko.BadHostKeyException:
             self.err(str(datetime.datetime.now()))
-            self.err(' - %s@%s: ' % (self.host, self.user))
+            self.err(' - %s@%s: ' % (self.user, self.host))
             self.err('bad host key!\n')
             self.exception_type = paramiko.BadHostKeyException
             ret_val = False
         except paramiko.SSHException:
             self.err(str(datetime.datetime.now()))
-            self.err(' - %s@%s: ' % (self.host, self.user))
+            self.err(' - %s@%s: ' % (self.user, self.host))
             self.err('SSH exception!\n')
             self.exception_type = paramiko.SSHException
             ret_val = False
         except error:
             self.err(str(datetime.datetime.now()))
-            self.err(' - %s@%s: ' % (self.host, self.user))
+            self.err(' - %s@%s: ' % (self.user, self.host))
             self.err('bad host key!\n')
             self.exception_type = socket.self.error
             ret_val = False
@@ -75,7 +76,7 @@ class ssh( ):
                 ret_val = False
             else:
                 self.err(str(datetime.datetime.now()))
-                self.err(' - %s@%s using %s: ' % (self.host, self.user, passwd))
+                self.err(' - %s@%s using %s: ' % (self.user, self.host, passwd))
                 self.err('successful login!\n')
                 ret_val = True
             self.conn.close()
