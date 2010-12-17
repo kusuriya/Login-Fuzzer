@@ -2,7 +2,6 @@
 
 import datetime
 import sys
-from ..interfaces import ssh
 
 class Fuzzer():
     fuzz_set       = None
