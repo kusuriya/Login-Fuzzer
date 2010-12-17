@@ -7,7 +7,7 @@ verify the fuzzer.
 from interfaces.echo import echo
 from engines.fuzzer import Fuzzer
 
-fuzz_set = [ ['t', 'T'], ['e', 'E', '3' ], ['s', 'S'], ['t', 'T'], ['i', 'I'], ['n', 'N'], ['g', 'G'], ['!', '#', '$'] ]
+fuzz_set = [ 'tT', 'eE3', 'sS', 'tT', 'iI', 'nN', 'gG', '!#$' ]
 password = 'T3StInG#'
 target = echo(password)
 

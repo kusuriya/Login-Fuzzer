@@ -6,22 +6,8 @@ Test code to test SSH engine using fuzzer.
 from engines.fuzzer import Fuzzer
 from interfaces.ssh import ssh
 
-fuzz_set = [
-                ['C', 'c'],
-                ['R', 'r'],
-                ['A', 'a', '4'],
-                ['C', 'c'],
-                ['K', 'k'],
-                ['T', 't'],
-                ['H', 'h'],
-                ['I', 'i', '1'],
-                ['S', 's'],
-                ['P', 'p'],
-                ['A', 'a', '4'],
-                ['S', 's', '5'],
-                ['S', 's', '5'],
-                ['!', '@', '#', '$']
-]
+fuzz_set = [ 'Cc', 'Rr', 'Aa4', 'Cc', 'Kk', 'Tt', 'Hh', 'Ii1', 'Ss', 'Pp',
+             'Aa4', 'Ss5', 'Ss5', '!@#$' ]
 
 min = len(fuzz_set)
 max = len(fuzz_set)
