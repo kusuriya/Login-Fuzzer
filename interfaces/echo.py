@@ -2,20 +2,21 @@
 
 class echo( ):
     target      = None
-    def __init__(self, target):
+    def __init__(self, target, dump = False):
         self.set_target(target)
         
     def set_target(self, target):
         self.target = target
         
     def trypass(self, password):
-        #print "trying password:", password,
+        if dump: print "trying password:", password,
         if password == self.target:
-            print "trying password:", password,
-            print "\t[ MATCH ]"
+            if debug: print "\t[ MATCH ]"
+            
+            print "match with password:", password,
             return True
         else:
-            #print "\t[ FAILED! ]"
+            if debug: print "\t[ FAILED! ]"
             return False
     
     def _targetspec(self):
@@ -28,5 +29,3 @@ class echo( ):
                 echo(target="pAsSwOrD")
         """
         
-    
-    
