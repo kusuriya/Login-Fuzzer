@@ -39,7 +39,7 @@ class ssh( ):
             while not "Error reading SSH protocol banner" == self.err_str:
                 print 'Sleeping for SSH timeout...'
                 time.sleep(5)
-                if not self.try_pass(passwd): return False
+                if not self.test_pass(passwd): return False
                 else: return True
             return False
         else:
