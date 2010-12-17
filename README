@@ -6,3 +6,37 @@ what password I intended to use when setting the root password, but
 apparently I typo'd it *twice*. This is my attempt at regaining access 
 without having to spend $50 for a JTAG adapter.
 
+INTRO:
+A set of python tools to couple bruteforcing engines with login interfaces.
+Right now, there is one functional engine (fuzzer) and two functional
+interfaces (echo and ssh).
+
+Each of the modules is documented. I will be working on a module to 
+facilitate setting up new bruteforces without having to write your own
+code to do so.
+
+TEST_*.PY:
+There are some test scripts to demonstrate using the code -
+    test_fe.py      couples fuzzer engine with echo interface
+                    The echo interface just prints output to the screen
+                    and tries the current password against a test string.
+    test_fs.py      couples fuzzer engine with SSH interface.
+                    The script tries to brute force the password of the
+                    user 'crackme' on the local machine.
+
+WARNING:
+If you use the SSH module, you are not going to be sneaky. This is useful
+for regaining access to machines you can't easily reset the root password
+on (i.e. my guru plug) or for auditing certain users on systems in your
+network. This will very noisly add authentication failures to auth.log;
+if the system runs fail2ban you will be *quickly* blocked by the firewall.
+
+DEPENDENCIES:
+    ssh interface requires paramiko.
+        OpenBSD: pkg_add py-paramiko (or security/py-paramiko in ports)
+        Debian: apt-get install python-paramiko
+        Python Setuptools: easy_install paramiko
+
+TODO:
+    * add multiprocessor / threading support
+
