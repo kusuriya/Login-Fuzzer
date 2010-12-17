@@ -18,15 +18,17 @@ class Fuzzer():
 
     def crack(self):    
         for width in range(self.start, self.end + 1):
-            if self.password or self._recurse(width, 0, ""):
-                return self.password
+            self._recurse(width, 0, "")
+        return self.password
         
-    def _recurse(self, width, position, base): 
+    def _recurse(self, width, position, base):
         for char in self.fuzz_set[position]:
-                if (position < width - 1):
-                    if self._recurse(width, position + 1, base + "%c" % char):
-                        return True
-        if self.target.trypass(base + "%c" % char):
-            self.password = base + "%c" % char
-            return True
+            if (position < width - 1):
+                if self._recurse(width, position + 1, '%s%s' % (base, char)):
+                    return True
+            else:
+                print 'trying password: ' + '%s%s' % (base, char)
+                if self.target.trypass('%s%s' % (base, char)):
+                    self.password = '%s%s' % (base, char)
+                    return True
 
