@@ -8,7 +8,7 @@ class echo( ):
     def set_target(self, target):
         self.target = target
         
-    def test_password(self, password):
+    def trypass(self, password):
         print "trying password:", password,
         if password == target:
             print "\t[ MATCH ]"
