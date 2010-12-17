@@ -31,6 +31,11 @@ on (i.e. my guru plug) or for auditing certain users on systems in your
 network. This will very noisly add authentication failures to auth.log;
 if the system runs fail2ban you will be *quickly* blocked by the firewall.
 
+This would also apply to any future interfaces that have any sort of 
+logging and proactive response attached to them. 
+
+ninjas don't bruteforce, yo.
+
 DEPENDENCIES:
     ssh interface requires paramiko.
         OpenBSD: pkg_add py-paramiko (or security/py-paramiko in ports)
