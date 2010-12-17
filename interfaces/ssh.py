@@ -85,9 +85,9 @@ class ssh( ):
             self.exception_type = 'GENERIC EXCEPTION'
             ret_val = False
         else:
-            (stdin, stdout, stdself.err)     = self.conn.exec_command('whoami')
+            (stdin, stdout, stderr)     = self.conn.exec_command('whoami')
             whoami                      = stdout.read().strip()
-            if not whoami == user:
+            if not whoami == self.user:
                 self.err('$(whoami) doesn\'t match user (expected %s, got %s)\n' %
                     (user, whoami))
                 ret_val = False
