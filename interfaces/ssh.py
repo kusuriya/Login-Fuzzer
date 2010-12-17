@@ -96,7 +96,7 @@ class ssh( ):
                 self.err(' - %s@%s using %s: ' % (self.user, self.host, passwd))
                 self.err('successful login!\n')
                 ret_val = True
-            self.conn.close()
+        self.conn.close()
         return ret_val
     
     def _targetspec(self):
@@ -118,5 +118,9 @@ class ssh( ):
         self.exception_type = None
         return True
     
-    
+    def reset_client(self):
+        self.conn.close()
+        self.conn     = paramiko.SSHClient()
+        self.conn.load_system_host_keys()
+        self.conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
