@@ -7,6 +7,7 @@ import datetime
 import paramiko
 import pdb
 import sys
+import time
 from socket import error
 
 class ssh( ):
@@ -22,6 +23,7 @@ class ssh( ):
         self.set_target(target)
         self.conn     = paramiko.SSHClient()
         self.conn.load_system_host_keys()
+        self.conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     def set_target(self, target ):
         """
@@ -32,35 +34,50 @@ class ssh( ):
         self.user    = username
         self.host    = hostname
 
-    
     def trypass(self, passwd):
-        ret_val         = False
+        if not self.test_pass(passwd):
+            while not "Error reading SSH protocol banner" == self.err_str:
+                print 'Sleeping for SSH timeout...'
+                time.sleep(5)
+                if not self.test_pass(passwd): return False
+                else: return True
+            return False
+        else:
+            return True
     
+    def test_pass(self, passwd):
+        self.clear_error()
+        ret_val         = False
+        
         try:
             self.conn.connect(self.host, username = self.user, password = passwd,
                          timeout = 1)
-        except paramiko.AuthenticationException:
+        except paramiko.AuthenticationException, e:
+            self.err_str == str(e)
             self.err(str(datetime.datetime.now()))
             self.err(' - %s@%s using %s: ' % (self.user, self.host, passwd))
-            self.err('bad password!\n')
+            self.err('bad password!\n\tError message: ' + str(e) + '\n')
             self.exception_type = paramiko.AuthenticationException
             ret_val = False
-        except paramiko.BadHostKeyException:
+        except paramiko.BadHostKeyException, e:
+            self.err_str == str(e)
             self.err(str(datetime.datetime.now()))
             self.err(' - %s@%s: ' % (self.user, self.host))
-            self.err('bad host key!\n')
+            self.err('bad host key!\n\tError message: ' + str(e) + '\n')
             self.exception_type = paramiko.BadHostKeyException
             ret_val = False
-        except paramiko.SSHException:
+        except paramiko.SSHException, e:
+            self.err_str == str(e)
             self.err(str(datetime.datetime.now()))
             self.err(' - %s@%s: ' % (self.user, self.host))
-            self.err('SSH exception!\n')
+            self.err('SSH exception!\n\tError message: ' + str(e) + '\n')
             self.exception_type = paramiko.SSHException
             ret_val = False
-        except error:
+        except error, e:
+            self.err_str == str(e)
             self.err(str(datetime.datetime.now()))
             self.err(' - %s@%s: ' % (self.user, self.host))
-            self.err('bad host key!\n')
+            self.err('bad host key!\n\tError message: ' + str(e) + '\n')
             self.exception_type = socket.self.error
             ret_val = False
         except:
@@ -97,8 +114,8 @@ class ssh( ):
         """
         Reset the global exception type variable.
         """
-        self.err_str     = None
-        
+        self.err_str        = None
+        self.exception_type = None
         return True
     
     
