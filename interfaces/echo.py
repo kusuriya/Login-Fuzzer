@@ -10,7 +10,7 @@ class echo( ):
         
     def trypass(self, password):
         print "trying password:", password,
-        if password == target:
+        if password == self.target:
             print "\t[ MATCH ]"
             return True
         else:
