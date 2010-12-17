@@ -10,10 +10,10 @@ class Fuzzer():
     target         = None
     password       = None
     
-    def __init__(self, i_fuzz_set, min, max, target):
+    def __init__(self, i_fuzz_set, start, end, target):
         self.fuzz_set = i_fuzz_set
-        self.start = min
-        self.end = max
+        self.start = start
+        self.end = end
         self.target = target 
 
     def crack(self):    
