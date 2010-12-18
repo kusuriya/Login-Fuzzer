@@ -41,3 +41,38 @@ class Bruteforcer(Fuzzer):
             if punc:    charset += PUNC
         
             self.fuzz_set.append(charset)
+
+    def set_target(self, target):
+        self.target = target
+
+def selector( ):
+    upper       = False
+    lower       = False
+    num         = False
+    special     = False
+    punc        = False
+    
+    upper   = 'y' == raw_input('Use uppercase characters (y/n)? ').lower()[0]
+    lower   = 'y' == raw_input('Use lowercase characters (y/n)? ').lower()[0]
+    num     = 'y' == raw_input('Use numbers (y/n)? ').lower()[0]
+    special = 'y' == raw_input('Use special characters (y/n)? ').lower()[0]
+    punc    = 'y' == raw_input('Use punctuation (y/n)? ').lower()[0]
+    
+    start   = raw_input('Start with how many characters? ')
+    if not start.isdigit():
+        print 'expected a numeric value...'
+        return None
+    else:
+        start   = int(start)
+    
+    end     = raw_input('End at how many characters? ')
+    if not end.isdigit():
+        print 'expected a numeric value...'
+        return None
+    elif int(end) < start:
+        print 'end should be greater than or equal to start!'
+        return None
+    else:
+        end     = int(end)
+    
+    return Bruteforcer(start, end, None, upper, lower, num, special, punc)

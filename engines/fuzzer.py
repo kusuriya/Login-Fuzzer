@@ -29,8 +29,24 @@ class Fuzzer():
                     self.password = '%s%s' % (base, char)
                     return True
 
+    def set_target(self, target):
+        self.target = target
+
 def selector( ):
-    fuzz_set    = raw_input('fuzz set:')
+    in_str      = "NOT_NULL"
+    fuzz_set    = [ ]
+    i           = 0
+    
+    print "Enter characters for fuzz_set[%d] as a string sequence, empty " % i
+    print "line to end."    
+    while in_str:
+        in_str = raw_input('\tstring for position' + str(i) + ': ')
+        
+        if in_str:
+            fuzz_set.append(in_str)
+            i += 1
+        
+        
     start       = raw_input('minimum number of chars:')
     end         = raw_input('maximum number of chars:')
 

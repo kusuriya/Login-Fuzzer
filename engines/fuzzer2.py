@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+New password generation backend, suggested by Evan.
+"""
 
 import itertools
 
@@ -25,4 +28,32 @@ class Fuzzer():
                     print "MATCH:", password
                     return password
 
+    def set_target(self, target):
+
+        self.target = target
+
+def selector( ):
+    in_str      = "NOT_NULL"
+    fuzz_set    = [ ]
+    i           = 0
+    
+    print "Enter characters for fuzz_set[%d] as a string sequence, empty " % i
+    print "line to end."    
+    while in_str:
+        in_str = raw_input('\tstring for position' + str(i) + ': ')
         
+        if in_str:
+            fuzz_set.append(in_str)
+            i += 1
+        
+        
+    start       = raw_input('minimum number of chars:')
+    end         = raw_input('maximum number of chars:')
+
+    if not start.isdigit() or not end.isdigit():
+        print 'Number of characters must be a numberic (integer) value!'
+        return None
+    else:
+        start   = int(start)
+        end     = int(end)
+        return Fuzzer(fuzz_set, start, end, None)
