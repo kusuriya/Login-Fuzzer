@@ -52,7 +52,8 @@ class Generic( ):
 def selector( ):
     """
     The selector function provides an interactive way to set up an
-    instance of an engine.
+    instance of an engine. The target should be None (a target can
+    set later via the set_target method. Added selector for fuzzer.
     """
 
     start   = None
