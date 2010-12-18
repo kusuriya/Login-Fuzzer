@@ -29,3 +29,16 @@ class Fuzzer():
                     self.password = '%s%s' % (base, char)
                     return True
 
+def selector( ):
+    fuzz_set    = raw_input('fuzz set:')
+    start       = raw_input('minimum number of chars:')
+    end         = raw_input('maximum number of chars:')
+
+    if not start.isdigit() or not end.isdigit():
+        print 'Number of characters must be a numberic (integer) value!'
+        return None
+    else:
+        start   = int(start)
+        end     = int(end)
+        return Fuzzer(fuzz_set, start, end, None)
+
