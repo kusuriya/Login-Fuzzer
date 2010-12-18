@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-import datetime
-import sys
-
 class Fuzzer():
     fuzz_set       = None
     start          = None
