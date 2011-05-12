@@ -31,6 +31,17 @@ class Fuzzer():
     def set_target(self, target):
 
         self.target = target
+        
+    def create_map(self):
+        map = [ ]
+        for i in range(self.start, self.end + 1):
+            fuzz_set = self.fuzz_set[:i + 1]
+            
+            for j in itertools.product(*fuzz_set):
+                password    = ''.join(j)
+                map.append(password)
+        
+        return map
 
 def selector( ):
     in_str      = "NOT_NULL"
